@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo1 from "../../../../images/logo/logo-12.png";
+import logo3 from "../../../../images/logo/logo-11.png";
 
 const Navbar = () => {
   return (
@@ -28,28 +30,28 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100  w-32"
               >
-                <li to="/">
-                  <Link>Home</Link>
+                <li>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <Link>Courses</Link>
+                  <Link to="/course">Course</Link>
                 </li>
                 <li>
-                  <Link>FAQ</Link>
+                  <Link to="/FAQ">FAQ</Link>
                 </li>
                 <li>
-                  <Link>Blog</Link>
+                  <Link to="/blog">Blog</Link>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="flex items-center gap-4 mx-6">
-            <div>
-              <h1>Logo</h1>
+            <div className="hidden sm:block">
+              <img className="w-32 rounded" src={logo1} alt="" />
             </div>
             <div className="">
-              <h2 className=" text-xl font-bold">Site Name</h2>
+              <h2 className=" text-3xl font-semibold">Skill Up</h2>
             </div>
           </div>
 
@@ -58,13 +60,13 @@ const Navbar = () => {
               <Link to="/">
                 <li className="mr-4">Home</li>
               </Link>
-              <Link>
+              <Link to="/course">
                 <li className="mr-4">Courses</li>
               </Link>
-              <Link>
+              <Link to="/FAQ">
                 <li className="mr-4">FAQ</li>
               </Link>
-              <Link>
+              <Link to="/blog">
                 <li className="mr-4">Blog</li>
               </Link>
             </ul>
