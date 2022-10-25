@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <div className="navbar bg-gray-100 flex">
+      <div className="navbar bg-gray-300 flex">
         <div className="grow">
           <div className=" block sm:hidden">
             <div className="dropdown">
