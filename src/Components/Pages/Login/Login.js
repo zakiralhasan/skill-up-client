@@ -6,34 +6,32 @@ const Login = () => {
     <div>
       <form>
         <div className="hero bg-base-200">
-          <div className="hero-content flex-col ">
+          <div className="hero-content h-screen flex-col ">
             <div className="text-center ">
               <h1 className="text-4xl font-semibold">Login now!</h1>
             </div>
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card rounded-md flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
               <div className="card-body">
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Email</span>
-                  </label>
+                <div className="form-control mb-2">
                   <input
                     type="email"
                     name="email"
-                    placeholder="email"
-                    className="input input-bordered"
+                    placeholder="Email"
+                    className="py-2 outline-none "
+                    required
                   />
+                  <hr />
                 </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Password</span>
-                  </label>
+                <div className="form-control mb-2">
                   <input
                     type="password"
                     name="password"
-                    placeholder="password"
-                    className="input input-bordered"
+                    placeholder="Password"
+                    className="py-2 outline-none "
+                    required
                   />
-                  <label className="label">
+                  <hr />
+                  <label className="label mt-2">
                     <Link
                       to="/reset"
                       className="label-text-alt link link-hover"
