@@ -6,6 +6,7 @@ import ErrorPage from "../Components/Pages/ErrorPage/ErrorPage";
 import FAQ from "../Components/Pages/FAQ/FAQ";
 import Home from "../Components/Pages/Home/Home";
 import Login from "../Components/Pages/Login/Login";
+import PremiumCourse from "../Components/Pages/PremiumCourse/PremiumCourse";
 import Register from "../Components/Pages/Register/Register";
 import Main from "../Layout/Main";
 
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home></Home> },
       {
-        path: "/course",
+        path: "course",
         element: <Course></Course>,
         loader: () => fetch("http://localhost:5000/course"),
       },
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/course/${params.courseID}`),
       },
-      { path: "/FAQ", element: <FAQ></FAQ> },
+      { path: "premium", element: <PremiumCourse></PremiumCourse> },
+      { path: "FAQ", element: <FAQ></FAQ> },
       { path: "login", element: <Login></Login> },
       { path: "register", element: <Register></Register> },
       { path: "blog", element: <Blog></Blog> },

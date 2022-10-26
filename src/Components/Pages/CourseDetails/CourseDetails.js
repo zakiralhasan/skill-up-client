@@ -55,7 +55,7 @@ const CourseDetails = () => {
         </div>
         <p className="text-left m-4 font-medium">
           If you are interested to learn more topics, please purchase our{" "}
-          <Link to="" className="text-blue-500 link link-hover">
+          <Link to="/premium" className="text-blue-500 link link-hover">
             premium cours.
           </Link>
         </p>
