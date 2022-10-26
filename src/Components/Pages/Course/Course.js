@@ -4,8 +4,6 @@ import { Link, useLoaderData } from "react-router-dom";
 const Course = () => {
   const courseTitle = useLoaderData();
 
-  console.log(courseTitle);
-
   return (
     <div className="bg-gray-100 flex flex-col sm:flex-row pb-4">
       <div className="basis-1/5 px-2 mt-16 hidden sm:block">

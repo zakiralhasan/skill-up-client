@@ -12,7 +12,7 @@ const CourseDetails = () => {
     topics03,
     topics04,
   } = useLoaderData();
-  console.log(topics04);
+
   return (
     <div>
       <div>

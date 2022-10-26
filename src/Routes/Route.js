@@ -10,6 +10,7 @@ import PremiumCourse from "../Components/Pages/PremiumCourse/PremiumCourse";
 import Register from "../Components/Pages/Register/Register";
 import Reset from "../Components/Pages/Reset/Reset";
 import Main from "../Layout/Main";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,14 @@ const router = createBrowserRouter([
       { path: "login", element: <Login></Login> },
       { path: "register", element: <Register></Register> },
       { path: "blog", element: <Blog></Blog> },
-      { path: "premium", element: <PremiumCourse></PremiumCourse> },
+      {
+        path: "premium",
+        element: (
+          <PrivetRoute>
+            <PremiumCourse></PremiumCourse>
+          </PrivetRoute>
+        ),
+      },
       { path: "/reset", element: <Reset></Reset> },
     ],
   },

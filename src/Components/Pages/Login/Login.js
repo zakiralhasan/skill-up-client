@@ -1,16 +1,26 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa";
+import swal from "sweetalert";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const provider = new GoogleAuthProvider();
-  const { user, userLoginWithEmailAndPassword, loginUserWithGoogle } =
-    useContext(AuthContext);
+  const {
+    user,
+    userLoginWithEmailAndPassword,
+    loginUserWithGoogle,
+    setLoading,
+  } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  console.log(user);
   const handleForm = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -20,8 +30,16 @@ const Login = () => {
     //user login with email and password
     userLoginWithEmailAndPassword(email, password)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
+        const loginUser = result.user;
+        console.log(loginUser);
+
+        // used for user email verification issue resolve
+        navigate(from, { replace: true });
+        // if (user?.emailVerified) {
+        //   navigate(from, { replace: true });
+        // } else {
+        //   swal(" Your email is not verified yet! Please verify your email.");
+        // }
         form.reset();
         setErrorMessage("");
       })
