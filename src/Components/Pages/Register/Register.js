@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthProvider";
 
 const Register = () => {
+  const { creatUser } = useContext(AuthContext);
+
+  const formHandle = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const imgURL = form.imageURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(name, imgURL, email, password);
+
+    creatUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={formHandle}>
         <div className="hero bg-base-200">
           <div className="hero-content flex-col ">
             <div className="text-center ">
