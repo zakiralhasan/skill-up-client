@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 import logo1 from "../../../../images/logo/logo-12.png";
 import logo3 from "../../../../images/logo/logo-11.png";
 import { AuthContext } from "../../../../Contexts/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user, logOutUser, loading } = useContext(AuthContext);
   console.log(user);
 
   const hndleUserLogout = () => {
@@ -82,22 +83,21 @@ const Navbar = () => {
           </div>
         </div>
         {/* end */}
-
-        {user?.uid ? (
+        {!user?.uid ? (
           <div>
             <Link to="/login">
               <button className="btn btn-sm btn-ghost normal-case mr-2 text-xl">
                 Login
               </button>
             </Link>
-            <h1>PIC</h1>
+            <FaUserAlt className="text-xl" />
           </div>
         ) : (
           <div className="">
             <div className="dropdown dropdown-end  ">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://placeimg.com/80/80/people" />
+                  <img src={user.photoURL} alt="" title={user.displayName} />
                 </div>
               </label>
               <ul

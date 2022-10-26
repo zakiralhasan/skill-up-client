@@ -1,17 +1,23 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub, FaFacebook } from "react-icons/fa";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
-  const { user, userLoginWithEmailAndPassword } = useContext(AuthContext);
+  const provider = new GoogleAuthProvider();
+  const { user, userLoginWithEmailAndPassword, loginUserWithGoogle } =
+    useContext(AuthContext);
+
   const handleForm = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(email, password);
 
+    //user login with email and password
     userLoginWithEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user;
@@ -25,6 +31,20 @@ const Login = () => {
         form.reset();
       });
   };
+
+  //user login with google account
+  const loginWithGoogle = () => {
+    loginUserWithGoogle(provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+      });
+  };
   return (
     <div>
       <form onSubmit={handleForm}>
@@ -35,6 +55,15 @@ const Login = () => {
             </div>
             <div className="card rounded-md flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
               <div className="card-body">
+                <div className="flex justify-around text-2xl">
+                  <FcGoogle
+                    onClick={loginWithGoogle}
+                    className="cursor-pointer"
+                  />
+                  <FaGithub className="cursor-pointer" />
+                  <FaFacebook className="text-blue-500 cursor-pointer" />
+                </div>
+                <div className="divider">OR</div>
                 <div className="form-control mb-2">
                   <input
                     type="email"
