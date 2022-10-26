@@ -5,7 +5,7 @@ import { AuthContext } from "../../../Contexts/AuthProvider";
 const Register = () => {
   const { creatUser } = useContext(AuthContext);
 
-  const formHandle = (event) => {
+  const handleForm = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -24,7 +24,7 @@ const Register = () => {
   };
   return (
     <div>
-      <form onSubmit={formHandle}>
+      <form onSubmit={handleForm}>
         <div className="hero bg-base-200">
           <div className="hero-content flex-col ">
             <div className="text-center ">

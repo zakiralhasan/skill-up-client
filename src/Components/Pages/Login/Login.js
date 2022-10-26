@@ -1,13 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 
 const Login = () => {
-  const user = useContext(AuthContext);
-  console.log(user);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const { user, userLoginWithEmailAndPassword } = useContext(AuthContext);
+  const handleForm = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+
+    userLoginWithEmailAndPassword(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+        form.reset();
+      });
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={handleForm}>
         <div className="hero bg-base-200">
           <div className="hero-content h-screen flex-col ">
             <div className="text-center ">
@@ -42,6 +62,8 @@ const Login = () => {
                       Forgot password?
                     </Link>
                   </label>
+                  {/* show error message at login time */}
+                  <p className="text-xs text-red-500">{errorMessage}</p>
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn bg-blue-400 border-none">Login</button>
