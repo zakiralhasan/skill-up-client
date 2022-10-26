@@ -21,7 +21,12 @@ const router = createBrowserRouter([
         element: <Course></Course>,
         loader: () => fetch("http://localhost:5000/course"),
       },
-      { path: "/course/:courseID", element: <CourseDetails></CourseDetails> },
+      {
+        path: "/course/:courseID",
+        element: <CourseDetails></CourseDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/course/${params.courseID}`),
+      },
       { path: "/FAQ", element: <FAQ></FAQ> },
       { path: "login", element: <Login></Login> },
       { path: "register", element: <Register></Register> },

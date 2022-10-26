@@ -7,8 +7,8 @@ const Course = () => {
   console.log(courseTitle);
 
   return (
-    <div className="bg-gray-50 flex pb-4">
-      <div className="basis-1/5 px-2 mt-8">
+    <div className="bg-gray-100 flex flex-col sm:flex-row pb-4">
+      <div className="basis-1/5 px-2 mt-16 hidden sm:block">
         <h1 className="text-2xl font-semibold">Course Title</h1>
         <ul className="mt-4 list-inside list-decimal">
           {courseTitle.map((title) => (
@@ -21,8 +21,10 @@ const Course = () => {
 
       {/* right side */}
       <div className="basis-4/5 mx-4">
-        <h1>course card</h1>
-        <div className="grid grid-cols-3 gap-6">
+        <h1 className="text-amber-500 text-xl font-semibold my-5">
+          Please select your desired course and learn with the Skill Up team.
+        </h1>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {courseTitle.map((title) => (
             <div
               key={title.id}
