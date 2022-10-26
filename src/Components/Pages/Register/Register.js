@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
+import swal from "sweetalert";
 
 const Register = () => {
-  const { creatUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const { creatUser, updateUserProfile, userEmailVerification } =
+    useContext(AuthContext);
 
   const handleForm = (event) => {
     event.preventDefault();
@@ -12,20 +15,49 @@ const Register = () => {
     const imgURL = form.imageURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(name, imgURL, email, password);
+    console.log(name, imgURL, email, password);
 
     creatUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        userVerification();
+        updateUserInfoWithPicture(name, imgURL);
         form.reset();
+        setErrorMessage("");
+        swal("Hello world!");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+        form.reset();
+      });
+  };
+
+  //update user profile with name and picture
+  const updateUserInfoWithPicture = (name, imgURL) => {
+    console.log(name, imgURL);
+    updateUserProfile({ displayName: name, photoURL: imgURL })
+      .then(() => {})
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+      });
+  };
+
+  //verify user through valid mail
+  const userVerification = () => {
+    userEmailVerification()
+      .then()
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+      });
   };
   return (
     <div>
       <form onSubmit={handleForm}>
-        <div className="hero bg-base-200">
+        <div className=" bg-base-200">
           <div className="hero-content flex-col ">
             <div className="text-center ">
               <h1 className="text-4xl font-semibold">Register Free!</h1>
@@ -77,6 +109,8 @@ const Register = () => {
                       Alrady have an account?
                     </Link>
                   </label>
+                  {/* show error message at login time */}
+                  <p className="text-xs text-red-500">{errorMessage}</p>
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn bg-blue-400 border-none">

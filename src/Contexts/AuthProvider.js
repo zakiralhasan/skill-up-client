@@ -3,9 +3,12 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
@@ -24,6 +27,11 @@ const AuthProvider = ({ children }) => {
   //user login with email and password
   const userLoginWithEmailAndPassword = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  //take user name and photo URL during registration
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
   };
 
   //login user through google
@@ -46,9 +54,19 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribeUser();
   }, []);
 
+  //user email varify through valid mail
+  const userEmailVerification = (email) => {
+    return sendEmailVerification(auth.currentUser);
+  };
+
   //logout user
   const logOutUser = () => {
     return signOut(auth);
+  };
+
+  //reset user password through email
+  const resetUserPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
   };
 
   const authInfo = {
@@ -57,6 +75,9 @@ const AuthProvider = ({ children }) => {
     userLoginWithEmailAndPassword,
     loginUserWithGoogle,
     logOutUser,
+    updateUserProfile,
+    userEmailVerification,
+    resetUserPassword,
     loading,
     setLoading,
   };

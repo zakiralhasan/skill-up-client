@@ -48,8 +48,8 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleForm}>
-        <div className="hero bg-base-200">
-          <div className="hero-content h-screen flex-col ">
+        <div className=" bg-base-200">
+          <div className="hero-content flex-col ">
             <div className="text-center ">
               <h1 className="text-4xl font-semibold">Login now!</h1>
             </div>
@@ -89,6 +89,14 @@ const Login = () => {
                       className="label-text-alt link link-hover"
                     >
                       Forgot password?
+                    </Link>
+                  </label>
+                  <label className="label">
+                    <Link
+                      to="/register"
+                      className="label-text-alt link link-hover"
+                    >
+                      Don't have an account?
                     </Link>
                   </label>
                   {/* show error message at login time */}
