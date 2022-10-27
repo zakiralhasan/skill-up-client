@@ -12,7 +12,7 @@ const Login = () => {
     userLoginWithEmailAndPassword,
     loginUserWithGoogle,
     loginUserWithGithub,
-    setLoading,
+    loginUserWithFacebook,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -76,6 +76,20 @@ const Login = () => {
         setErrorMessage(errorMsg);
       });
   };
+
+  //user login with google account
+  const loginWithFacebook = () => {
+    loginUserWithFacebook()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+      });
+  };
   return (
     <div>
       <form onSubmit={handleForm}>
@@ -95,7 +109,10 @@ const Login = () => {
                     onClick={loginWithGithub}
                     className="cursor-pointer"
                   />
-                  <FaFacebook className="text-blue-500 cursor-pointer" />
+                  <FaFacebook
+                    onClick={loginWithFacebook}
+                    className="text-blue-500 cursor-pointer"
+                  />
                 </div>
                 <div className="divider">OR</div>
                 <div className="form-control mb-2">

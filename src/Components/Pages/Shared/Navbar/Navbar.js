@@ -5,7 +5,7 @@ import logo1 from "../../../../images/logo/logo-12.png";
 import { AuthContext } from "../../../../Contexts/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOutUser, loading } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   // console.log(user);
 
   const hndleUserLogout = () => {

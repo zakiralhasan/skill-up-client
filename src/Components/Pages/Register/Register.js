@@ -25,7 +25,9 @@ const Register = () => {
         updateUserInfoWithPicture(name, imgURL);
         form.reset();
         setErrorMessage("");
-        swal("Hello world!");
+        swal(
+          "A verification email has been sent to your email address! Please check."
+        );
       })
       .catch((error) => {
         const errorMsg = error.message;
