@@ -33,10 +33,16 @@ const Course = () => {
                 src={title.img}
                 alt=""
               />
-              <h1>{title.name}</h1>
-              <p>Name</p>
+              <h1 className="font-medium">{title.name}</h1>
+              <p>
+                Price: <span>$</span>
+                {""}
+                {title.price}
+              </p>
               <Link to={`/course/${title.id}`}>
-                <button>Go</button>
+                <button className="btn bg-blue-400 border-none w-full mt-2">
+                  Select Course
+                </button>
               </Link>
             </div>
           ))}

@@ -1,4 +1,3 @@
-import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
@@ -8,11 +7,11 @@ import swal from "sweetalert";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
-  const provider = new GoogleAuthProvider();
   const {
     user,
     userLoginWithEmailAndPassword,
     loginUserWithGoogle,
+    loginUserWithGithub,
     setLoading,
   } = useContext(AuthContext);
 
@@ -35,11 +34,11 @@ const Login = () => {
 
         // used for user email verification issue resolve
         navigate(from, { replace: true });
-        // if (user?.emailVerified) {
-        //   navigate(from, { replace: true });
-        // } else {
-        //   swal(" Your email is not verified yet! Please verify your email.");
-        // }
+        if (user.emailVerified) {
+          navigate(from, { replace: true });
+        } else {
+          swal(" Your email is not verified yet! Please verify your email.");
+        }
         form.reset();
         setErrorMessage("");
       })
@@ -52,7 +51,21 @@ const Login = () => {
 
   //user login with google account
   const loginWithGoogle = () => {
-    loginUserWithGoogle(provider)
+    loginUserWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+      });
+  };
+
+  //user login with google account
+  const loginWithGithub = () => {
+    loginUserWithGithub()
       .then((result) => {
         const user = result.user;
         console.log(user);
@@ -78,7 +91,10 @@ const Login = () => {
                     onClick={loginWithGoogle}
                     className="cursor-pointer"
                   />
-                  <FaGithub className="cursor-pointer" />
+                  <FaGithub
+                    onClick={loginWithGithub}
+                    className="cursor-pointer"
+                  />
                   <FaFacebook className="text-blue-500 cursor-pointer" />
                 </div>
                 <div className="divider">OR</div>

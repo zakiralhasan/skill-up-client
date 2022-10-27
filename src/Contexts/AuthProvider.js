@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
@@ -16,6 +18,8 @@ export const AuthContext = createContext();
 
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
+  const providerGoogle = new GoogleAuthProvider();
+  const providerGithub = new GithubAuthProvider();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,9 +42,9 @@ const AuthProvider = ({ children }) => {
   };
 
   //login user through google
-  const loginUserWithGoogle = (provider) => {
+  const loginUserWithGoogle = () => {
     setLoading(true);
-    return signInWithPopup(auth, provider);
+    return signInWithPopup(auth, providerGoogle);
   };
 
   //monitoring login user
@@ -48,7 +52,11 @@ const AuthProvider = ({ children }) => {
     const unsubscribeUser = () => {
       onAuthStateChanged(auth, (currentUser) => {
         // used for user email verification issue resolve
-        if (currentUser === null || currentUser.emailVerified) {
+        if (
+          currentUser === null ||
+          currentUser.emailVerified ||
+          currentUser.uid
+        ) {
           setUser(currentUser);
         }
         setLoading(false);
@@ -61,6 +69,12 @@ const AuthProvider = ({ children }) => {
   const userEmailVerification = (email) => {
     setLoading(true);
     return sendEmailVerification(auth.currentUser);
+  };
+
+  //login user through Github
+  const loginUserWithGithub = () => {
+    setLoading(true);
+    return signInWithPopup(auth, providerGithub);
   };
 
   //logout user
@@ -84,6 +98,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     userEmailVerification,
     resetUserPassword,
+    loginUserWithGithub,
     loading,
     setLoading,
   };

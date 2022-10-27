@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import logo1 from "../../../../images/logo/logo-12.png";
-import logo3 from "../../../../images/logo/logo-11.png";
 import { AuthContext } from "../../../../Contexts/AuthProvider";
 
 const Navbar = () => {

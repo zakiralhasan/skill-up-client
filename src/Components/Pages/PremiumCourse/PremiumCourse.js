@@ -1,11 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import swal from "sweetalert";
 
 const PremiumCourse = () => {
+  const { name } = useLoaderData();
+  const courseName = name;
+
+  const handleForm = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const transectionID = form.transectionID.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, transectionID, email, password);
+    swal({
+      title: "Congraculation!",
+      text: `You have successfully purchese the ${courseName} course!`,
+      icon: "success",
+      button: "Ok",
+    });
+    form.reset();
+  };
   return (
     <div>
       <div>
-        <form>
+        <form onSubmit={handleForm}>
           <div className="hero bg-base-200">
             <div className="hero-content flex flex-col sm:flex-row ">
               <div className="text text-left ">
@@ -28,7 +48,7 @@ const PremiumCourse = () => {
                   <div className="form-control mb-2">
                     <input
                       type="text"
-                      name="imageURL"
+                      name="transectionID"
                       placeholder="Enter your transaction ID"
                       className="py-2 outline-none "
                       required

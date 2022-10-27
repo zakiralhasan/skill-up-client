@@ -2,14 +2,14 @@ import React from "react";
 
 const FAQ = () => {
   return (
-    <div>
-      <h1 className="text-2xl my-6 font-semibold text-amber-500">
+    <div className="bg-gray-100">
+      <h1 className="text-2xl py-6 font-semibold text-amber-500">
         Frequently asked questions answer has given below.
       </h1>
       <div>
         <div
           tabIndex={0}
-          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4"
+          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4 rounded shadow-md"
         >
           <div className="collapse-title text-xl font-medium text-justify">
             How will we learn through this course?
@@ -23,7 +23,7 @@ const FAQ = () => {
         </div>
         <div
           tabIndex={1}
-          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4"
+          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4 rounded shadow-md"
         >
           <div className="collapse-title text-xl font-medium text-justify">
             How much time we will be able to access the provided videos?
@@ -37,7 +37,7 @@ const FAQ = () => {
         </div>
         <div
           tabIndex={2}
-          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4"
+          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4 rounded shadow-md"
         >
           <div className="collapse-title text-xl font-medium text-justify">
             Is this course totally free?
@@ -52,7 +52,7 @@ const FAQ = () => {
         </div>
         <div
           tabIndex={3}
-          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4"
+          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4 rounded shadow-md"
         >
           <div className="collapse-title text-xl font-medium text-justify">
             Is there any live session on this course?
@@ -66,7 +66,7 @@ const FAQ = () => {
         </div>
         <div
           tabIndex={4}
-          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4"
+          className="collapse collapse-arrow border border-base-300 bg-base-100 mx-4 my-4 rounded shadow-md"
         >
           <div className="collapse-title text-xl font-medium text-justify">
             Why your course is better than others?
@@ -79,6 +79,7 @@ const FAQ = () => {
             </p>
           </div>
         </div>
+        <div className="pb-4"></div>
       </div>
     </div>
   );

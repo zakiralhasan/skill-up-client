@@ -35,12 +35,14 @@ const router = createBrowserRouter([
       { path: "register", element: <Register></Register> },
       { path: "blog", element: <Blog></Blog> },
       {
-        path: "premium",
+        path: "/premium/:ID",
         element: (
           <PrivetRoute>
             <PremiumCourse></PremiumCourse>
           </PrivetRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/premium/${params.ID}`),
       },
       { path: "/reset", element: <Reset></Reset> },
     ],
