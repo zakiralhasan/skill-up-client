@@ -6,8 +6,6 @@ const PremiumCourse = () => {
   const [purcheseInfo, setPurcheseInfo] = useState(null);
   const { name, price } = useLoaderData();
   const courseName = name;
-  console.log(purcheseInfo);
-
   const handleForm = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -16,7 +14,6 @@ const PremiumCourse = () => {
     const email = form.email.value;
     const password = form.password.value;
     // setPurcheseInfo({ name, transectionID, email });
-    console.log(name, transectionID, email, password);
     swal({
       title: "Congraculation!",
       text: `You have successfully purchese the ${courseName} course!`,

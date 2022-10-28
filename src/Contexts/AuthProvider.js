@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
-  FacebookAuthProvider,
   getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -21,7 +20,6 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const providerGoogle = new GoogleAuthProvider();
   const providerGithub = new GithubAuthProvider();
-  const providerFacebook = new FacebookAuthProvider();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,53 +47,36 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, providerGoogle);
   };
 
-  //monitoring login user
-  useEffect(() => {
-    const unsubscribeUser = () => {
-      onAuthStateChanged(auth, (currentUser) => {
-        // used for user email verification issue resolve
-        if (
-          currentUser === null ||
-          currentUser.emailVerified ||
-          currentUser.uid
-        ) {
-          setUser(currentUser);
-        }
-        setLoading(false);
-      });
-    };
-    return () => unsubscribeUser();
-  }, []);
-
-  //user email varify through valid mail
-  const userEmailVerification = (email) => {
-    setLoading(true);
-    return sendEmailVerification(auth.currentUser);
-  };
-
   //login user through Github
   const loginUserWithGithub = () => {
     setLoading(true);
     return signInWithPopup(auth, providerGithub);
   };
 
-  //login user through Facebook
-  const loginUserWithFacebook = () => {
-    setLoading(true);
-    return signInWithPopup(auth, providerFacebook);
+  //user email varify through valid mail
+  const userEmailVerification = (email) => {
+    return sendEmailVerification(auth.currentUser);
   };
 
   //logout user
   const logOutUser = () => {
-    setLoading(true);
     return signOut(auth);
   };
 
   //reset user password through email
   const resetUserPassword = (email) => {
-    setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
+
+  //monitoring login user
+  useEffect(() => {
+    const unsubscribeUser = onAuthStateChanged(auth, (currentUser) => {
+      console.log("inside auth state change", currentUser);
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribeUser();
+  }, []);
 
   const authInfo = {
     user,
@@ -107,9 +88,9 @@ const AuthProvider = ({ children }) => {
     userEmailVerification,
     resetUserPassword,
     loginUserWithGithub,
-    loginUserWithFacebook,
     loading,
     setLoading,
+    setUser,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

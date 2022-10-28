@@ -22,13 +22,15 @@ const router = createBrowserRouter([
       {
         path: "course",
         element: <Course></Course>,
-        loader: () => fetch("http://localhost:5000/course"),
+        loader: () => fetch("https://skill-up-server-kappa.vercel.app/course"),
       },
       {
         path: "/course/:courseID",
         element: <CourseDetails></CourseDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/course/${params.courseID}`),
+          fetch(
+            `https://skill-up-server-kappa.vercel.app/course/${params.courseID}`
+          ),
       },
       { path: "FAQ", element: <FAQ></FAQ> },
       { path: "login", element: <Login></Login> },
@@ -42,7 +44,9 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/premium/${params.ID}`),
+          fetch(
+            `https://skill-up-server-kappa.vercel.app/premium/${params.ID}`
+          ),
       },
       { path: "/reset", element: <Reset></Reset> },
     ],

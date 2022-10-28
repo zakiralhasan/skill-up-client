@@ -15,7 +15,6 @@ const Register = () => {
     const imgURL = form.imageURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, imgURL, email, password);
 
     creatUser(email, password)
       .then((result) => {
@@ -38,7 +37,6 @@ const Register = () => {
 
   //update user profile with name and picture
   const updateUserInfoWithPicture = (name, imgURL) => {
-    console.log(name, imgURL);
     updateUserProfile({ displayName: name, photoURL: imgURL })
       .then(() => {})
       .catch((error) => {

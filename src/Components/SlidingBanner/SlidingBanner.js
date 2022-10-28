@@ -1,9 +1,9 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Autoplay, Navigation, Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 
 import banner1 from "../../images/banner/spoken-english.jpg";
 import banner2 from "../../images/banner/digital-markating.png";
@@ -16,14 +16,14 @@ const SlidingBanner = () => {
   return (
     <div className="">
       <Swiper
-        navigation={true}
+        // navigation={true}
         pagination={true}
         loop={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
         <SwiperSlide className="">

@@ -18,11 +18,7 @@ const PrivetRoute = ({ children }) => {
 
   //access for valid user only
   if (!user) {
-    return (
-      <Navigate to="/login" state={{ from: location }} replace>
-        {children}
-      </Navigate>
-    );
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
   } else {
     return children;
   }

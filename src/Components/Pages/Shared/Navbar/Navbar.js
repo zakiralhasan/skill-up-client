@@ -1,18 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import logo1 from "../../../../images/logo/logo-12.png";
 import { AuthContext } from "../../../../Contexts/AuthProvider";
 
 const Navbar = () => {
+  const [dark, setDark] = useState(false);
   const { user, logOutUser } = useContext(AuthContext);
-  // console.log(user);
 
   const hndleUserLogout = () => {
     logOutUser()
       .then(() => {})
       .catch((error) => console.error(error));
   };
+
+  //dark mode controller
+  const darkController = () => {
+    if (!dark) {
+      return setDark(true);
+    }
+    setDark(false);
+  };
+
   return (
     <div>
       <div className="navbar bg-gray-300 flex">
@@ -81,6 +90,18 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
+        {!dark ? (
+          <p className="bg-amber-200 px-2 py-px font-light mr-2 rounded-lg">
+            Light
+          </p>
+        ) : (
+          <p className="bg-gray-600 px-2 py-px text-white font-light mr-2 rounded-lg">
+            Dark
+          </p>
+        )}
+        <div className="mr-4">
+          <input type="checkbox" className="toggle" onClick={darkController} />
+        </div>
         {/* end */}
         {!user?.uid ? (
           <div>
@@ -101,7 +122,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-sm w-32"
               >
                 <li>
                   <a className="">Profile</a>

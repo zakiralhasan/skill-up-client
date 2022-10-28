@@ -2,24 +2,23 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaFacebook } from "react-icons/fa";
-import swal from "sweetalert";
+import { FaGithub } from "react-icons/fa";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const {
     user,
+    setUser,
+    setLoading,
     userLoginWithEmailAndPassword,
     loginUserWithGoogle,
     loginUserWithGithub,
-    loginUserWithFacebook,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  console.log(user);
   const handleForm = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -30,15 +29,8 @@ const Login = () => {
     userLoginWithEmailAndPassword(email, password)
       .then((result) => {
         const loginUser = result.user;
-        console.log(loginUser);
-
-        // used for user email verification issue resolve
+        setUser(loginUser);
         navigate(from, { replace: true });
-        if (user.emailVerified) {
-          navigate(from, { replace: true });
-        } else {
-          swal(" Your email is not verified yet! Please verify your email.");
-        }
         form.reset();
         setErrorMessage("");
       })
@@ -46,6 +38,9 @@ const Login = () => {
         const errorMsg = error.message;
         setErrorMessage(errorMsg);
         form.reset();
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -53,43 +48,38 @@ const Login = () => {
   const loginWithGoogle = () => {
     loginUserWithGoogle()
       .then((result) => {
-        const user = result.user;
+        const loginUser = result.user;
         console.log(user);
+        setUser(loginUser);
         setErrorMessage("");
       })
       .catch((error) => {
         const errorMsg = error.message;
         setErrorMessage(errorMsg);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
-  //user login with google account
+  //user login with github account
   const loginWithGithub = () => {
     loginUserWithGithub()
       .then((result) => {
-        const user = result.user;
+        const loginUser = result.user;
         console.log(user);
+        setUser(loginUser);
         setErrorMessage("");
       })
       .catch((error) => {
         const errorMsg = error.message;
         setErrorMessage(errorMsg);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
-  //user login with google account
-  const loginWithFacebook = () => {
-    loginUserWithFacebook()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        setErrorMessage("");
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        setErrorMessage(errorMsg);
-      });
-  };
   return (
     <div>
       <form onSubmit={handleForm}>
@@ -108,10 +98,6 @@ const Login = () => {
                   <FaGithub
                     onClick={loginWithGithub}
                     className="cursor-pointer"
-                  />
-                  <FaFacebook
-                    onClick={loginWithFacebook}
-                    className="text-blue-500 cursor-pointer"
                   />
                 </div>
                 <div className="divider">OR</div>
