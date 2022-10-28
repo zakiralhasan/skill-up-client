@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import logo1 from "../../../../images/logo/logo-12.png";
+import logo2 from "../../../../images/backup-profile-pic.jpg";
 import { AuthContext } from "../../../../Contexts/AuthProvider";
 
 const Navbar = () => {
@@ -75,18 +76,46 @@ const Navbar = () => {
 
           <div className="hidden sm:block">
             <ul className="flex">
-              <Link to="/">
-                <li className="mr-4">Home</li>
-              </Link>
-              <Link to="/course">
-                <li className="mr-4">Courses</li>
-              </Link>
-              <Link to="/FAQ">
-                <li className="mr-4">FAQ</li>
-              </Link>
-              <Link to="/blog">
-                <li className="mr-4">Blog</li>
-              </Link>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? `text-red-600 mr-4` : `hover:text-red-600 mr-4`
+                  }
+                  to="/home"
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? `text-red-600 mr-4` : `hover:text-red-600 mr-4`
+                  }
+                  to="/course"
+                >
+                  Courses
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? `text-red-600 mr-4` : `hover:text-red-600 mr-4`
+                  }
+                  to="/FAQ"
+                >
+                  FAQ
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? `text-red-600 mr-4` : `hover:text-red-600 mr-4`
+                  }
+                  to="/blog"
+                >
+                  Blog
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -117,7 +146,13 @@ const Navbar = () => {
             <div className="dropdown dropdown-end  ">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src={user.photoURL} alt="" title={user.displayName} />
+                  <img
+                    src={user?.photoURL ? user.photoURL : logo2}
+                    alt=""
+                    title={
+                      user?.displayName ? user.displayName : "No name found"
+                    }
+                  />
                 </div>
               </label>
               <ul
