@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const hndleUserLogout = () => {
     logOutUser()
-      .then(() => {})
+      .then(() => { })
       .catch((error) => console.error(error));
   };
 
@@ -69,9 +69,9 @@ const Navbar = () => {
             <div className="hidden sm:block">
               <img className="w-32 rounded" src={logo1} alt="" />
             </div>
-            <div className="">
+            {/* <div className="">
               <h2 className=" text-3xl font-semibold">Skill Up</h2>
-            </div>
+            </div> */}
           </div>
 
           <div className="hidden sm:block">

@@ -50,6 +50,7 @@ const Login = () => {
       .then((result) => {
         const loginUser = result.user;
         console.log(user);
+        navigate(from, { replace: true });
         setUser(loginUser);
         setErrorMessage("");
       })
@@ -68,6 +69,7 @@ const Login = () => {
       .then((result) => {
         const loginUser = result.user;
         console.log(user);
+        navigate(from, { replace: true });
         setUser(loginUser);
         setErrorMessage("");
       })
